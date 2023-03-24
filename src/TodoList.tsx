@@ -9,11 +9,11 @@ type TaskType = {
 
 type PropsType = {
   title: string
-  rrr: string
   tasks: Array<TaskType>
   removeTask: (taskId: string) => void
-  changeFilter: (value: FilterValuesType) => void;
+  changeFilter: (value: FilterValuesType) => void
   addTask: (title: string) => void
+  toggleTask: (id: string) => void
 }
 
 export function TodoList(props: PropsType) {
@@ -34,18 +34,20 @@ function addTask () {
   } 
   
     return (
-      <div>
-        <h3>
-          {props.title}
-        </h3>
-        <div>
-          <input value={newText} type='text' onChange={handleChange} />
-          <button onClick={addTask}>+</button>
-        </div> 
-        <div>
-          <button onClick={onAllClickHandler}>All</button>
-          <button onClick={onActiveClickHandler}>Active</button>
-          <button onClick={onCompletedClickHandler}>Completed</button>
+      <div className="todolist">
+        <div className="inp">
+            <h3>
+              {props.title}
+            </h3>
+          <div>
+            <input value={newText} type='text' onChange={handleChange} />
+            <button onClick={addTask}>+</button>
+          </div>
+          <div className="btnFilter">
+            <button onClick={onAllClickHandler}>All</button>
+            <button onClick={onActiveClickHandler}>Active</button>
+            <button onClick={onCompletedClickHandler}>Completed</button>
+          </div>
         </div>
         <ul>
           {
@@ -54,10 +56,13 @@ function addTask () {
               const onRemoveHandler = () => {
                 props.removeTask(item.id)
               }
+              const handleToggleClick = () => {
+                props.toggleTask(item.id)
+              }
 
-              return <li key = {item.id}><input type="checkbox" checked={item.isDone} />
-                  <span>{item.title}</span>
-                  <button onClick={onRemoveHandler}>x</button>
+              return <li key = {item.id} >
+                    <span onClick={handleToggleClick} style={{textDecoration: item.isDone ? 'line-through' : 'none'}} className="spans">{item.title}</span>
+                    <button className="removeHandler" onClick={onRemoveHandler}>X</button>
                 </li>
             }
             )
