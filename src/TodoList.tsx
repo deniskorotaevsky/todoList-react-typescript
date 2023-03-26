@@ -35,13 +35,13 @@ function addTask () {
   
     return (
       <div className="todolist">
-        <div className="inp">
+        <div className="inputValue">
             <h3>
               {props.title}
             </h3>
           <div>
             <input value={newText} type='text' onChange={handleChange} />
-            <button onClick={addTask}>+</button>
+            <button className="btnAddTask" onClick={addTask}>+</button>
           </div>
           <div className="btnFilter">
             <button onClick={onAllClickHandler}>All</button>
@@ -64,11 +64,9 @@ function addTask () {
                     <span onClick={handleToggleClick} style={{textDecoration: item.isDone ? 'line-through' : 'none'}} className="spans">{item.title}</span>
                     <button className="removeHandler" onClick={onRemoveHandler}>X</button>
                 </li>
+            })
             }
-            )
-          }
         </ul> 
-
       </div>
    ) 
   }

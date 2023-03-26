@@ -15,7 +15,7 @@ function App() {
   ]
 
   const [tasks, setTasks] = useState(initTasks);
-  const [filter, setFilter] = useState<FilterValuesType>('all');
+  const [filter, setFilter] = useState<FilterValuesType>('active');
 
   function removeTask(id: string) {
     let resultTasks = tasks.filter(item => item.id !== id);
